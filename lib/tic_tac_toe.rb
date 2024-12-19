@@ -51,7 +51,7 @@ class TicTacToe
 
   def congratulation_message(the_winner)
     puts '----------------------------------'.colorize(the_winner.color)
-    puts "#{the_winner.name} (#{the_winner.char}) is the winner!".colorize(the_winner.color)
+    puts "#{the_winner.name} (#{the_winner.char}) wins".colorize(the_winner.color)
     puts '----------------------------------'.colorize(the_winner.color)
   end
 
