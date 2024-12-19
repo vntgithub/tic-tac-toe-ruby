@@ -17,12 +17,17 @@ This is a simple implementation of the classic Tic Tac Toe game written in Ruby.
 1. Clone the repository:
    ```bash
    git clone https://github.com/vntgithub/tic-tac-toe-ruby
-   cd tic-tac-toeruby
+   cd tic-tac-toe-ruby
    ```
 2. Ensure Ruby is installed on your system:
    ```bash
    ruby --version
    ```
+3. Install dependencies:
+   ```bash
+   gem install bundler
+   bundle install
+   ```   
 
 ## How to Play
 1. Run the game:
@@ -71,7 +76,7 @@ Player's name (X) wins!
    ```
 2. Run the tests:
    ```bash
-   rspec spec/tic_tac_toe_spec.rb
+   rspec .
    ```
 
 ## Contributing
