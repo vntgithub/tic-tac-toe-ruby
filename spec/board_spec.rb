@@ -196,23 +196,4 @@ RSpec.describe 'Test board class' do # rubocop:disable Metrics/BlockLength
       expect(output.string.chomp).to eq(expected_output)
     end
   end
-
-  describe 'Test update the winner' do
-    it 'Update is_end_game is true and the_winner = X' do
-      board = Board.new
-      board.mark(0, 0, 'X')
-      board.mark(0, 1, 'O')
-      board.mark(0, 2, 'X')
-      board.mark(1, 0, 'O')
-      board.mark(1, 1, 'X')
-      board.mark(1, 2, 'O')
-      board.mark(2, 0, 'X')
-      board.mark(2, 2, 'O')
-
-      board.update_the_winner
-
-      expect(board.is_end_game).to eq(true)
-      expect(board.the_winner).to eq('X')
-    end
-  end
 end

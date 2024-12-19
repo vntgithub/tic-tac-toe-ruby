@@ -8,8 +8,6 @@ class Board
   VALID_POSITION = { 0 => true, 1 => true, 2 => true }.freeze
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
-    @is_end_game = false
-    @the_winner = nil
   end
 
   def rows_check
@@ -22,9 +20,13 @@ class Board
     nil
   end
 
+  def col(index)
+    [@board[0][index], @board[1][index], @board[2][index]]
+  end
+
   def cols_check
     (0..2).each do |index|
-      cells_of_column = [@board[0][index], @board[1][index], @board[2][index]].reject { |cell| cell == ' ' }
+      cells_of_column = col(index).reject { |cell| cell == ' ' }
       size = cells_of_column.size
       uniq_size = cells_of_column.uniq.size
       return cells_of_column[0] if size == 3 && uniq_size == 1
@@ -57,21 +59,25 @@ class Board
     nil
   end
 
-  def update_the_winner
-    the_winner = find_the_winner
-    return unless the_winner
+  def all_cell_marked?
+    all_cell_marked = true
+    @board.each do |row|
+      has_empty_cell = row.any?(' ')
+      all_cell_marked = false if has_empty_cell
+      break if has_empty_cell
+    end
+    all_cell_marked
+  end
 
-    @is_end_game = true
-    @the_winner = the_winner
+  def valid_position?(row, col)
+    VALID_POSITION.key?(col) && VALID_POSITION.key?(row) && @board[row][col] == ' '
   end
 
   def mark(row, col, char)
-    if VALID_POSITION.key?(col) && VALID_POSITION.key?(row) && @board[row][col] == ' '
-      @board[row][col] = char
-      update_the_winner
-      return :ok
-    end
-    :error
+    return :error unless valid_position?(row, col)
+
+    @board[row][col] = char
+    :ok
   end
 
   def render_board
